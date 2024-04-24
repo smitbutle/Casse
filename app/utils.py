@@ -9,7 +9,7 @@ from app import app
 
 def generate_token(user):
     return jwt.encode({
-        'userid': user.user_id,
+        'user_id': user.user_id,
         'username': user.username,
         'exp': datetime.now(timezone.utc) + timedelta(minutes=60*24*30)
     }, app.config['SECRET_KEY'], algorithm='HS256')
@@ -45,7 +45,7 @@ def ApiKeyVerify(f):
             return jsonify({'status': 'failed', 'message': 'Token is missing', 'code': 'MISSING_TOKEN'}), 401
         try:
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-            current_user = models.User.query.filter_by(user_id=data['userid']).first()
+            current_user = models.User.query.filter_by(user_id=data['user_id']).first()
         except:
             return jsonify({'status': 'failed', 'message': 'Token is invalid', 'code': 'INVALID_TOKEN'}), 401
         return f(current_user, *args, **kwargs)

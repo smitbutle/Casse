@@ -32,7 +32,7 @@ def login():
     return loginfunc()
 
 
-@app.route('/upload', methods=['POST'])
+@app.route(base_path + '/upload', methods=['POST'])
 @ApiKeyVerify
 def upload_function(data):
     return upload_function_handler(data)

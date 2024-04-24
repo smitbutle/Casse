@@ -36,7 +36,16 @@ gateway_client = boto3.client('apigateway',
                               region_name=aws_region,
                               config=boto3.session.Config(connect_timeout=15, read_timeout=20))
 
-
+def get_existing_resource_id(api_id, parent_resource_id, path_part):
+    response = gateway_client.get_resources(
+        restApiId=api_id,
+        limit=500
+    )
+    resources = response['items']
+    for resource in resources:
+        if resource['parentId'] == parent_resource_id and resource['pathPart'] == path_part:
+            return resource['id']
+    return None
 
 def upload_function_handler(data):
     function_code = request.form['function_code']
@@ -70,18 +79,24 @@ def upload_function_handler(data):
         )
 
     api_id = os.environ.get('API_ID')
-    resource_id = None
     
+    resource_id = get_existing_resource_id(api_id, os.environ.get('PARENT_RESOURCE_ID'), userName)
+
+    if resource_id == None:
+        response = gateway_client.create_resource(
+            restApiId=api_id,
+            parentId=os.environ.get('PARENT_RESOURCE_ID'),
+            pathPart=userName
+        )
+        resource_id = response['id']
+
+
     response = gateway_client.create_resource(
         restApiId=api_id,
-        parentId=os.environ.get('PARENT_RESOURCE_ID'),
-        pathPart=userName
-    )
-    response = gateway_client.create_resource(
-        restApiId=api_id,
-        parentId=response['id'],
+        parentId=resource_id,
         pathPart=functionName
     )
+    
     resource_id = response['id']
 
     print("gateway_client.create_resource", response)
@@ -274,7 +289,7 @@ def loginfunc():
 
         token = utils.generate_token(user)
 
-        return utils.resultdata(200, constants.SUCCESS_MESSAGE, {'userId': user.user_id,
+        return utils.resultdata(200, constants.SUCCESS_MESSAGE, {'user_id': user.user_id,
                                                                  'userFullName': user.user_fullname,
                                                                  'email': user.user_email,
                                                                  'username': user.username,

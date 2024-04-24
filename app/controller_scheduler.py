@@ -22,6 +22,7 @@ username = "clockwerk"
 password = "password"
 host = "localhost"
 port = "1929"
+
 go_api_path = os.environ.get('JOB_RUNNER_API_URL')
 
 def get_functions_handler(current_user):
