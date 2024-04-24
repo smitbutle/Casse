@@ -9,6 +9,7 @@ class User(db.Model):
     user_email = db.Column(db.String(500))
     password = db.Column(db.String(500))
     username = db.Column(db.String(500))
+    resource_id = db.Column(db.String(50))
     last_login_date = db.Column(db.DateTime)
     user_image = db.Column(db.LargeBinary)
     create_date = db.Column(db.DateTime, nullable=False, default=datetime.now(timezone.utc))

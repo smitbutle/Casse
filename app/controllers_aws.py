@@ -36,15 +36,11 @@ gateway_client = boto3.client('apigateway',
                               region_name=aws_region,
                               config=boto3.session.Config(connect_timeout=15, read_timeout=20))
 
-def get_existing_resource_id(api_id, parent_resource_id, path_part):
-    response = gateway_client.get_resources(
-        restApiId=api_id,
-        limit=500
-    )
-    resources = response['items']
-    for resource in resources:
-        if resource['parentId'] == parent_resource_id and resource['pathPart'] == path_part:
-            return resource['id']
+def get_existing_resource_id(userName):
+
+    user = User.query.filter_by(username=userName).first()
+    if user.resource_id:
+        return user.resource_id
     return None
 
 def upload_function_handler(data):
@@ -66,7 +62,7 @@ def upload_function_handler(data):
 
     with open(zip_file_path, 'rb') as zf:
         response = lambda_client.create_function(
-            FunctionName=userName+'_'+functionName,
+            FunctionName=userName+'__'+functionName,
             Runtime='python3.8',
             Role=os.environ.get('AWS_ROLE'),
             Handler=handlerName,
@@ -80,7 +76,7 @@ def upload_function_handler(data):
 
     api_id = os.environ.get('API_ID')
     
-    resource_id = get_existing_resource_id(api_id, os.environ.get('PARENT_RESOURCE_ID'), userName)
+    resource_id = get_existing_resource_id(userName)
 
     if resource_id == None:
         response = gateway_client.create_resource(
@@ -159,115 +155,7 @@ def upload_function_handler(data):
             "url": weburl,
         }
     }
-    # function_code = request.form['function_code']
-    # functionName = request.form['entry_point']
-    # userName = data.username
 
-    # temp_file_name = str(uuid.uuid4()) + ".py"
-    # file_path = "/media/drive/dev-linux/casse-v3/" + temp_file_name
-
-    # with open(file_path, 'w') as temp_file:
-    #     temp_file.write(function_code)
-
-    # zip_file_path = "/media/drive/dev-linux/casse-v3/lambda_function.zip"
-    # with zipfile.ZipFile(zip_file_path, 'w') as zipf:
-    #     zipf.write(file_path, os.path.basename(file_path))
-
-    # handlerName = os.path.splitext(temp_file_name)[0] + "." + functionName
-
-    # with open(zip_file_path, 'rb') as zf:
-    #     response = lambda_client.create_function(
-    #         FunctionName=userName+'_'+functionName,
-    #         Runtime='python3.8',
-    #         Role=os.environ.get('AWS_ROLE'),
-    #         Handler=handlerName,
-    #         Code={
-    #             'ZipFile': zf.read(),
-    #         },
-    #         Description='Test Function',
-    #         Timeout=15,
-    #         MemorySize=128
-    #     )
-
-    # api_id = os.environ.get('API_ID')
-
-    # try:
-    #     response = gateway_client.create_resource(
-    #         restApiId=api_id,
-    #         parentId=os.environ.get('PARENT_RESOURCE_ID'),
-    #         pathPart=userName
-    #     )
-    #     response = gateway_client.create_resource(
-    #         restApiId=api_id,
-    #         parentId=response['id'],
-    #         pathPart=functionName
-    #     )
-    # except Exception as e:
-    #     print(e)
-
-    # print("gateway_client.create_resource", response)
-
-    # resource_id = response['id']
-
-    # response = gateway_client.put_method(
-    #     restApiId=api_id,
-    #     resourceId=resource_id,
-    #     httpMethod='ANY',
-    #     authorizationType='NONE',
-    #     apiKeyRequired=False
-    # )
-
-    # print("gateway_client.put_method", response)
-
-    # response = gateway_client.put_integration(
-    #     restApiId=api_id,
-    #     resourceId=resource_id,
-    #     httpMethod='ANY',
-    #     type='AWS_PROXY',
-    #     integrationHttpMethod='POST',
-    #     uri='arn:aws:apigateway:'+os.environ.get('AWS_REGION')+':lambda:path/2015-03-31/functions/'+os.environ.get(
-    #         'AWS_ARN') + userName+'_'+functionName+'/invocations',
-    #     credentials=os.environ.get('AWS_ROLE')
-    # )
-
-    # print("gateway_client.put_integration", response)
-
-    # try:
-    #     response = gateway_client.create_deployment(
-    #         restApiId=api_id,
-    #         stageName='dev'
-    #     )
-    # except Exception as e:
-    #     print(e)
-
-    # print("create_deployment", response)
-
-    # # Cleanup temporary files
-    # os.remove(file_path)
-    # os.remove(zip_file_path)
-
-    # weburl = os.environ.get('GATEWAY_URL')+userName+'/'+functionName
-
-    # new_function = Functions(
-    #     entrypoint=functionName,
-    #     description=request.form['description'],
-    #     content=function_code,
-    #     weburl=weburl,
-    #     user_id=data.user_id
-    # )   
-    # db.session.add(new_function)
-    # db.session.commit()
-    # # return jsonify({'message': 'Function added successfully'}), 201
-
-
-    # return {
-    #     'statusCode': 200,
-    #     'body': {
-    #         "message": "Function uploaded successfully",
-    #         "functionName": userName+'_'+functionName,
-    #         "url": weburl,
-    #     }
-    # }
 
 
 def loginfunc():
@@ -312,11 +200,21 @@ def signupfunc():
 
     if not isEmailCheck:
         if not isUsernameCheck:
+            
+            response = gateway_client.create_resource(
+                restApiId=os.environ.get('API_ID'),
+                parentId=os.environ.get('PARENT_RESOURCE_ID'),
+                pathPart=username
+            )
+            resource_id = response['id']
+
             user = User(
                 user_fullname=fullname,
                 user_email=email,
                 password=generate_password_hash(password),
-                username=username)
+                username=username,
+                resource_id=resource_id)
+            
             db.session.add(user)
             db.session.commit()
             return utils.resultdata(201, constants.SUCCESS_MESSAGE, 'Successfully Registered.', 'SUCCESS_REGISTERED')
