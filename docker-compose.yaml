@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  casse-db:
+    image: casse-db
+    container_name: casse-db
+    ports:
+      - "5431:5432"
+    environment:
+      POSTGRES_PASSWORD: "smit2003"
+
+  redis-clockwerk:
+    image: redis
+    container_name: redis-clockwerk
+    ports:
+      - "6379:6379"
+    command: redis-server --save 60 1 --loglevel warning --requirepass redis123
+
+  casse-daemon:
+    image: casse-daemon
+    container_name: casse-daemon
+    ports:
+      - "1929:1929"
+    environment:
+      - SCHEDULER_USERNAME=clockwerk
+      - SCHEDULER_PASSWORD=password
+      - REDIS_HOST=redis-clockwerk
+      - REDIS_PORT=6379
+      - REDIS_PASS=redis123
+
+  casse-ui:
+    image: casse-ui
+    container_name: casse-ui
+    ports:
+      - "1940:1930"
+    environment:
+      - REACT_APP_SCHEDULER_HOST=localhost
+      - REACT_APP_SCHEDULER_PORT=1929
+      - REACT_APP_SCHEDULER_USERNAME=clockwerk
+      - REACT_APP_SCHEDULER_PASSWORD=password
+

@@ -18,7 +18,7 @@ import zipfile
 import dotenv
 import uuid
 
-username = "new_username"  
+username = "clockwerk"  
 password = "password"
 host = "localhost"
 port = "1929"
@@ -75,13 +75,6 @@ def get_jobs(data):
     else:
         return jsonify({'error': 'Failed to fetch job data'}), response.status_code
 
-
-    # function uuidv4() {
-    #     return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-    #       (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    #     );
-    #   }
-    #   'referenceId': uuidv4(),
 
 def create_scheduler_func(data):
     scheduler_data = request.json
