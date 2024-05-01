@@ -114,7 +114,7 @@ async function main() {
                 for (const jobData of data.jobs) {
                     jobBody = {
                         "name": jobData.name,
-                        "url": jobData.url,
+                        "url": jobData.url.split("?")[0],
                         "method": jobData.method,
                         "body": {
                             "desc": jobData.body
