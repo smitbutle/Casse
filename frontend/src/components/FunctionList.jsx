@@ -24,6 +24,7 @@ const FunctionList = () => {
       method: 'get',
     }).then((response) => {
       setFunctions(response.data.functions);
+      console.log(response.data.functions)
     });
   }, []);
 

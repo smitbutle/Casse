@@ -35,6 +35,7 @@ def get_functions_handler(current_user):
                 'content': function.content,
                 'weburl': function.weburl,
                 'create_date': function.create_date.strftime('%Y-%m-%d %H:%M:%S') if function.create_date else None,
+                'resource_id': function.resource_id,
                 'user_id': function.user_id
             }
             functions_data.append(function_data)
@@ -155,7 +156,7 @@ def delete_job_function(data):
         'password': password
     }
     response = requests.post(go_api_path + '/scheduler/' + scheduler_id, json=req)
-    
+
     if response.status_code == 200:
         return jsonify({'message': 'Scheduler deleted successfully'}), 200
     else:

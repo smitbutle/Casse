@@ -15,6 +15,7 @@ var port = "8000"
 
 const FunctionCard = ({ functionData }) => {
   const { content, create_date, description, entrypoint, function_id, user_id, weburl, resource_id } = functionData;
+  console.log(functionData)
   const [isExpanded, setIsExpanded] = useState(false);
 
   const formatContent = (content) => {
