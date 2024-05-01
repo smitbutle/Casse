@@ -10,6 +10,8 @@ services:
     container_name: casse-db
     expose:
       - 5432
+    ports:
+      - "5431:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
@@ -50,6 +52,7 @@ services:
   server:
     build:
       context: ./api
+    container_name: casse-server
     ports:
       - "8000:8000"
     env_file:

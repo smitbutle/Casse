@@ -134,3 +134,11 @@ def get_saved_functions(data):
 
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e), 'code': 'INTERNAL_SERVER_ERROR'}), 500
+    
+def send_email(data):
+    emailData = request.json
+    # emailData.username
+    # emailData.fullname
+    # emailData.email
+    # emailData.jobName
+    # emailData.nextExecutionString

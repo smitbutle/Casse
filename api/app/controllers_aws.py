@@ -114,7 +114,7 @@ def upload_function_handler(data):
         type='AWS_PROXY',
         integrationHttpMethod='POST',
         uri='arn:aws:apigateway:'+os.environ.get('AWS_REGION')+':lambda:path/2015-03-31/functions/'+os.environ.get(
-            'AWS_ARN') + userName+'_'+functionName+'/invocations',
+            'AWS_ARN') + userName+'__'+functionName+'/invocations',
         credentials=os.environ.get('AWS_ROLE')
     )
 
