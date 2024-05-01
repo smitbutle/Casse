@@ -10,6 +10,8 @@ const funcName1 = "helloWorld"
 const funcBody2 = "import json\nimport inspect\n\ndef deployTrigger(event, context):\n    api_url = \"https://api.example.com/data\"\n    try:\n        response = requests.get(api_url)\n        if response.status_code == 200:\n            data = response.json()\n            print(\"API Response:\", data)\n            return {\n                'statusCode': 200,\n                'body': json.dumps(data)\n            }\n        else:\n            print(\"API call failed with status code:\", response.status_code)\n            return {\n                'statusCode': response.status_code,\n                'body': json.dumps('API call failed')\n            }\n    except Exception as e:\n        print(\"Error occurred during API call:\", str(e))\n        return {\n            'statusCode': 500,\n            'body': json.dumps('Internal Server Error')\n        }\n"
 const funcName2 = "deployTrigger"
 
+const apiUrl = 'http://127.0.0.1:8000/api/';
+
 
 async function simulatePostRequest(url, data, token = null) {
     try {
@@ -35,10 +37,9 @@ async function readJsonFile(filePath) {
     }
 }
 
-const apiUrl = 'http://127.0.0.1:5000/api/';
 
 async function main() {
-    const mockData = await readJsonFile('CasseMockFull.json');
+    const mockData = await readJsonFile('CasseTest.json');
 
     if (mockData) {
 

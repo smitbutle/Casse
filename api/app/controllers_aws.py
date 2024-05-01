@@ -57,7 +57,7 @@ def delete_function(userName, functionName, resource_id):
         print(e)
 
 
-    Functions.query.filter_by(weburl='https://'+api_id+'.execute-api.'+os.environ.get('AWS_REGION')+'.amazonaws.com/'+os.environ.get('PARENT_RESOURCE_NAME')+'/' + userName+'/'+functionName).delete()
+    Functions.query.filter_by(weburl='https://'+api_id+'.execute-api.'+os.environ.get('AWS_REGION')+'.amazonaws.com/'+os.environ.get('STAGE_NAME')+'/'+ os.environ.get('PARENT_RESOURCE_NAME')+'/' + userName+'/'+functionName).delete()
     db.session.commit()
 
     return {
@@ -160,7 +160,7 @@ def upload_function_handler(data):
     os.remove(file_path)
     os.remove(zip_file_path)
 
-    weburl = 'https://'+api_id+'.execute-api.'+os.environ.get('AWS_REGION')+'.amazonaws.com/'+os.environ.get('PARENT_RESOURCE_NAME')+'/' +userName+'/'+functionName
+    weburl = 'https://'+api_id+'.execute-api.'+os.environ.get('AWS_REGION')+'.amazonaws.com/'+os.environ.get('STAGE_NAME')+'/'+ os.environ.get('PARENT_RESOURCE_NAME')+'/' +userName+'/'+functionName
 
     new_function = Functions(
         entrypoint=functionName,

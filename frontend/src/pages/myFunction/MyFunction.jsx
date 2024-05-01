@@ -40,7 +40,7 @@ function MyFunction() {
   };
 
   return (localStorage.getItem("token") == null || localStorage.getItem("token") == '') ? <Navigate to="/" /> :
-    <Box maxW="" mx="auto" mt={5} mb={5} >
+    <Box maxW="" mx="auto" mt={5} mb={2} >
       <Flex direction="column" gap={4} ml={10} mr={10} >
 
         <CodeEditor ref={codeEditorRef} setEntryPoint={setEntryPoint} entryPoint={entryPoint} />
