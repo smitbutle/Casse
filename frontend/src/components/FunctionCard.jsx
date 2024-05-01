@@ -8,9 +8,13 @@ import {
   AlertDialogOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
+import axios from 'axios';
+
+var host = "localhost"
+var port = "8000"
 
 const FunctionCard = ({ functionData }) => {
-  const { content, create_date, description, entrypoint, function_id, user_id, weburl } = functionData;
+  const { content, create_date, description, entrypoint, function_id, user_id, weburl, resource_id } = functionData;
   const [isExpanded, setIsExpanded] = useState(false);
 
   const formatContent = (content) => {
@@ -20,6 +24,30 @@ const FunctionCard = ({ functionData }) => {
   };
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef()
+
+  const deleteFunction = () => {
+    let req = {
+      'functionName': entrypoint,
+      'resource_id': resource_id,
+    }
+    axios({
+      baseURL: `http://${host}:${port}/api/deletefunc`,
+      headers: {
+        'Content-Type': "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      },
+      method: 'post',
+      data: req
+    }).then((response) => {
+      console.log(response)
+      // handleClickCloseDialog()
+      // props.setRe(!props.re)
+    }).then((error) => {
+      console.log(error)
+      // handleClickCloseDialog()
+      // props.setRe(!props.re)
+    });
+  }
   return (
     <Box borderWidth="1px" borderRadius="lg" p="4" m="2">
       <Flex justify="space-between" >
@@ -55,7 +83,7 @@ const FunctionCard = ({ functionData }) => {
                 <Button ref={cancelRef} onClick={onClose}>
                   Cancel
                 </Button>
-                <Button colorScheme='red' onClick={onClose} ml={3}>
+                <Button colorScheme='red' onClick={()=>{onClose(); deleteFunction();}} ml={3}>
                   Delete
                 </Button>
               </AlertDialogFooter>

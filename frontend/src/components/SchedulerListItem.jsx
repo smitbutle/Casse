@@ -27,6 +27,10 @@ import {
 import { DeleteIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 
+var host = "localhost"
+var port = "8000"
+
+
 export default function SchedulerListItem(props) {
   const [disabled, setDisabled] = useState(!props.scheduler.disabled);
   const [openModal, setOpenModal] = useState(false);
@@ -38,19 +42,13 @@ export default function SchedulerListItem(props) {
   }
 
   function deleteScheduler() {
-    let username = 'clockwerk'
-    let password = 'password'
-    let host = 'localhost'
-    let port = '1929'
 
     let req = {
       'id': props.scheduler.id,
       'referenceId': props.scheduler.referenceId,
-      'username': username,
-      'password': password
     }
     axios({
-      baseURL: `http://${host}:${port}/v1/scheduler/${props.scheduler.id}`,
+      baseURL: `http://${host}:${port}/api/deletejob`,
       headers: {
         'Content-Type': "application/json",
         'Authorization': `Bearer ${localStorage.getItem("token")}`
@@ -69,22 +67,16 @@ export default function SchedulerListItem(props) {
   }
 
   function switchScheduler() {
-    let username = 'clockwerk'
-    let password = 'password'
-    let host = 'localhost'
-    let port = '1929'
-
     let req = {
       'id': props.scheduler.id,
       'referenceId': props.scheduler.referenceId,
       'disabled': disabled,
-      'username': username,
-      'password': password
     }
     axios({
-      baseURL: `http://${host}:${port}/v1/scheduler/toggle/${props.scheduler.id}`,
+      baseURL: `http://${host}:${port}/api/toggle`,
       headers: {
         'Content-Type': "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
       },
       method: 'post',
       data: req

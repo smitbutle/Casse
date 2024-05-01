@@ -3,6 +3,9 @@ import { Box, Button, FormControl, FormLabel, Input, Stack, Link, HStack } from 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+var host = "localhost"
+var port = "8000"
+
 const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +18,7 @@ const Login = (props) => {
       password,
     };
     try {
-      const response = await axios.post('http://localhost:5000/api/login', data);
+      const response = await axios.post(`http://${host}:${port}/api/login`, data);
       if (response.status === 200) {
         props.onLoginSuccess();
         localStorage.setItem("token", response.data.result.token)

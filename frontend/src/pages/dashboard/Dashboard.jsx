@@ -77,7 +77,7 @@ function Dashboard({ schedulers }) {
 
           <table style={{ width: '100%', borderCollapse: 'collapse', overflow: 'hidden', borderRadius: '8px' }}>
             <thead>
-              <tr style={{ backgroundColor: '#0056B3', color: '#E6F4FF' }}> {/* Dark blue header */}
+              <tr style={{ backgroundColor: '#0056B3', color: '#E6F4FF' }}>
                 <th style={{ borderBottom: '2px solid #E6F4FF', padding: '12px 0', fontWeight: 'bold', textAlign: 'left', paddingLeft: '16px' }}>No.</th>
                 <th style={{ borderBottom: '2px solid #E6F4FF', padding: '12px 0', fontWeight: 'bold', textAlign: 'left', paddingLeft: '16px' }}>Job</th>
                 <th style={{ borderBottom: '2px solid #E6F4FF', padding: '12px 0', fontWeight: 'bold', textAlign: 'left', paddingLeft: '16px' }}>Last Execution Time</th>
@@ -92,7 +92,7 @@ function Dashboard({ schedulers }) {
                 return a.disabled ? 0 : getNextExecTimeRemaining(a.spec) - getNextExecTimeRemaining(b.spec);
 
               }).map((job, index) => (
-                <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#E6F4FF' : '#F5F5F5', color: '#333333' }}> {/* Alternating row colors */}
+                <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#E6F4FF' : '#F5F5F5', color: '#333333' }}>
                   <td style={{ borderBottom: '1px solid #E6F4FF', padding: '12px 0', textAlign: 'left', paddingLeft: '16px' }}>{index + 1}</td>
                   <td style={{ borderBottom: '1px solid #E6F4FF', padding: '12px 0', textAlign: 'left', paddingLeft: '16px' }}>{job.name}</td>
 

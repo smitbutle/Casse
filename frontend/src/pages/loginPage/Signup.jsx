@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { Box, Button, FormControl, FormLabel, HStack, Input, Stack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
+var host = "localhost"
+var port = "8000"
+
+
 const Signup = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -13,7 +17,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/signup', {
+      const response = await fetch(`http://${host}:${port}/api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

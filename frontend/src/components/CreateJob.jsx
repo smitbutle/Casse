@@ -7,13 +7,16 @@ import axios from "axios";
 import SchedulerListItem from './SchedulerListItem';
 import MainHeader from './MainHeader';
 
+var host = "localhost"
+var port = "8000"
+
 function CreateJob() {
   const [schedulers, setSchedulers] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get('http://localhost:5000/api/alljobs');
+        const response = await axios.get(`http://${host}:${port}/api/alljobs`);
         setSchedulers(response.data.schedulers);
       } catch (error) {
         console.error('Error fetching schedulers:', error);

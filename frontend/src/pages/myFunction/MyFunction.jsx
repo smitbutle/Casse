@@ -4,7 +4,13 @@ import { Box, Flex, Textarea, Button } from '@chakra-ui/react';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
-const apiUrl = 'http://localhost:5000/api/';
+
+var host = "localhost"
+var port = "8000"
+
+
+
+const apiUrl = `http://${host}:${port}/api/`;
 
 function MyFunction() {
   const [entryPoint, setEntryPoint] = useState('');
