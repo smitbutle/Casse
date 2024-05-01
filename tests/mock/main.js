@@ -39,8 +39,8 @@ async function readJsonFile(filePath) {
 
 
 async function main() {
-    const mockData = await readJsonFile('CasseTest.json');
-
+    // const mockData = await readJsonFile('CasseTest.json');
+    const mockData = await readJsonFile('CasseMockFull.json');
     if (mockData) {
 
         for (const data of mockData) {

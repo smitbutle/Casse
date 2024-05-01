@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, FormControl, FormLabel, Input, Stack, Link, HStack } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, Stack, Link, HStack, Image } from '@chakra-ui/react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,8 +28,8 @@ const Login = (props) => {
         alert('Invalid email or password');
       }
     } catch (error) {
-      alert('Network error - testing phase');
-      props.onLoginSuccess();
+      alert('Network error - Server down');
+      // props.onLoginSuccess();
     }
   };
 
@@ -38,24 +38,28 @@ const Login = (props) => {
   };
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh" bg="#f8f8f8">
-      <HStack>
-      <Stack spacing={4} w="300px" bg="white" p={6} rounded="md" boxShadow="md" >
+    <Box display="flex" bg="#f8f8f8"  width="100vw">
+      
+      <HStack bg="white" height="100vh" width="100vw" rounded="md" boxShadow="md" display="flex" justifyContent="flex-start" alignItems="center" >
+      <Box overflow="hidden" height="inherit" >
+        <Image src='/cron.png' alt="logo" height="100%" width="100%" />
+      </Box>
+      <Stack spacing={4} p={16} width="40vw" >
         <FormControl id="email">
           <FormLabel>Email</FormLabel>
-          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required size="sm"
+          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required 
             rounded="md" />
         </FormControl>
         <FormControl id="password">
           <FormLabel>Password</FormLabel>
-          <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required size="sm"
+          <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required 
             rounded="md" />
         </FormControl>
-        <Button type="submit" colorScheme="blue" size="sm"
+        <Button type="submit" colorScheme="blue" 
           rounded="md" onClick={handleSubmit}>
           Login
         </Button>
-        <Button size="sm"
+        <Button 
           rounded="md" onClick={routeToSignUp}>
           <Link>Sign Up</Link>
         </Button>

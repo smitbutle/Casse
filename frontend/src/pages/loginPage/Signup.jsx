@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, FormControl, FormLabel, HStack, Input, Stack } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, HStack, Image, Input, Stack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 var host = "localhost"
@@ -44,10 +44,14 @@ const Signup = () => {
   };
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-      <HStack>
+    <Box display="flex" bg="#f8f8f8" width="100vw">
+      
+      <HStack bg="white" height="100vh" width="100vw" rounded="md" boxShadow="md" display="flex" justifyContent="flex-start" alignItems="center" >
+      <Box overflow="hidden" height="inherit" >
+        <Image src='/cron.png' alt="logo" height="100%" />
+      </Box>
         <form onSubmit={handleSubmit}>
-          <Stack spacing={4} w="300px" bg="white" p={6} rounded="md" boxShadow="md">
+          <Stack spacing={4} p={16} width="40vw">
             <FormControl>
               <FormLabel>Username</FormLabel>
               <Input
@@ -55,7 +59,7 @@ const Signup = () => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                size="sm"
+                
                 rounded="md"
               />
             </FormControl>
@@ -66,7 +70,7 @@ const Signup = () => {
                 name="fullname"
                 value={formData.fullname}
                 onChange={handleChange}
-                size="sm"
+                
                 rounded="md"
               />
             </FormControl>
@@ -77,7 +81,7 @@ const Signup = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                size="sm"
+                
                 rounded="md"
               />
             </FormControl>
@@ -88,15 +92,15 @@ const Signup = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                size="sm"
+                
                 rounded="md"
               />
             </FormControl>
-            <Button type="submit" colorScheme="blue" size="sm"
+            <Button type="submit" colorScheme="blue" 
               rounded="md">
               Sign Up
             </Button>
-            <Button size="sm"
+            <Button 
               rounded="md">
               <Link to="/">Login</Link>
             </Button>
