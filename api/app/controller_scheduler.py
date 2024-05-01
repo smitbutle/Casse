@@ -126,6 +126,7 @@ def get_saved_functions(data):
                 'content': function.content,
                 'weburl': function.weburl,
                 'create_date': function.create_date.strftime('%Y-%m-%d %H:%M:%S') if function.create_date else None,
+                'resource_id': function.resource_id,
                 'user_id': function.user_id
             }
             functions_data.append(function_data)
