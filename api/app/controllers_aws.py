@@ -49,12 +49,12 @@ def upload_function_handler(data):
     userName = data.username
 
     temp_file_name = str(uuid.uuid4()) + ".py"
-    file_path = "/media/drive/dev-linux/casse-v3/" + temp_file_name
+    file_path = "./temp/" + temp_file_name
 
     with open(file_path, 'w') as temp_file:
         temp_file.write(function_code)
 
-    zip_file_path = "/media/drive/dev-linux/casse-v3/lambda_function.zip"
+    zip_file_path = "./temp/lambda_function.zip"
     with zipfile.ZipFile(zip_file_path, 'w') as zipf:
         zipf.write(file_path, os.path.basename(file_path))
 
