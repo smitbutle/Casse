@@ -20,8 +20,6 @@ import uuid
 
 username = "clockwerk"  
 password = "password"
-host = "localhost"
-port = "1929"
 
 go_api_path = os.environ.get('JOB_RUNNER_API_URL')
 
@@ -142,3 +140,45 @@ def send_email(data):
     # emailData.email
     # emailData.jobName
     # emailData.nextExecutionString
+
+
+def delete_job_function(data):
+    req_data = request.json
+
+    scheduler_id = req_data.get('id')
+    reference_id = req_data.get('referenceId')
+
+    req = {
+        'id': scheduler_id,  
+        'referenceId': reference_id,
+        'username': username,
+        'password': password
+    }
+    response = requests.post(go_api_path + '/scheduler/' + scheduler_id, json=req)
+    
+    if response.status_code == 200:
+        return jsonify({'message': 'Scheduler deleted successfully'}), 200
+    else:
+        return jsonify({'message': 'Failed to delete scheduler'}), response.status_code
+
+def toggle_job_function(data):
+    req_data = request.json
+
+    scheduler_id = req_data.get('id')
+    reference_id = req_data.get('referenceId')
+    disabled = req_data.get('disabled')
+
+    req = {
+        'id': scheduler_id,  
+        'referenceId': reference_id,
+        'disabled': disabled,
+        'username': username,
+        'password': password
+    }
+    
+    response = requests.post(go_api_path + '/scheduler/toggle/'+ scheduler_id, json=req)
+    print(response.json())
+    if response.status_code == 200:
+        return jsonify({'message': 'Scheduler toggle successfully'}), 200
+    else:
+        return jsonify({'message': 'Failed to toggle scheduler'}), response.status_code

@@ -1,3 +1,4 @@
+import resource
 from app import db
 from datetime import datetime, timezone
 
@@ -24,5 +25,6 @@ class Functions(db.Model):
     description = db.Column(db.Text)
     content = db.Column(db.Text)
     weburl = db.Column(db.Text)
+    resource_id = db.Column(db.String(50))
     create_date = db.Column(db.TIMESTAMP(timezone=False), nullable=False, default=db.func.current_timestamp())
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))

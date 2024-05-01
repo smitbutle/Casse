@@ -25,10 +25,12 @@ services:
     command: redis-server --save 60 1 --loglevel warning --requirepass redis123
 
   casse-daemon:
-    image: casse-daemon
+    image: smitbutle/casse-daemon
     container_name: casse-daemon
     expose:
       - 1929
+    ports:
+      - "1929:1929"
     environment:
       - SCHEDULER_USERNAME=clockwerk
       - SCHEDULER_PASSWORD=password
@@ -41,7 +43,7 @@ services:
       context: ./admin-ui
     container_name: casse-ui
     ports:
-      - "1940:1930"
+      - "1930:1930"
     environment:
       - REACT_APP_SCHEDULER_HOST=casse-daemon
       - REACT_APP_SCHEDULER_PORT=1929

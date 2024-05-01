@@ -17,6 +17,7 @@ CREATE TABLE functions (
     description TEXT,
     content TEXT,
     weburl TEXT,
+    resource_id VARCHAR(50),
 
     create_date TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT current_timestamp,
     user_id INT,

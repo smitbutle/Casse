@@ -37,11 +37,37 @@ gateway_client = boto3.client('apigateway',
                               config=boto3.session.Config(connect_timeout=15, read_timeout=20))
 
 def get_existing_resource_id(userName):
-
     user = User.query.filter_by(username=userName).first()
     if user.resource_id:
         return user.resource_id
     return None
+
+def delete_function(userName, functionName, resource_id):
+    try:
+        response = lambda_client.delete_function(FunctionName=userName+'__'+functionName)
+    except Exception as e:
+        print(e)
+
+    api_id = os.environ.get('API_ID')
+    
+    try:
+        response = gateway_client.delete_resource(restApiId=api_id, resourceId=resource_id)
+        print("gateway_client.delete_resource", response)
+    except Exception as e:
+        print(e)
+
+
+    Functions.query.filter_by(weburl='https://'+api_id+'.execute-api.'+os.environ.get('AWS_REGION')+'.amazonaws.com/'+os.environ.get('PARENT_RESOURCE_NAME')+'/' + userName+'/'+functionName).delete()
+    db.session.commit()
+
+    return {
+        'statusCode': 200,
+        'body': {
+            "message": "Function deleted successfully",
+            "functionName": userName+'_'+functionName
+        }
+    }
+
 
 def upload_function_handler(data):
     function_code = request.form['function_code']
@@ -134,10 +160,11 @@ def upload_function_handler(data):
     os.remove(file_path)
     os.remove(zip_file_path)
 
-    weburl = os.environ.get('GATEWAY_URL')+userName+'/'+functionName
+    weburl = 'https://'+api_id+'.execute-api.'+os.environ.get('AWS_REGION')+'.amazonaws.com/'+os.environ.get('PARENT_RESOURCE_NAME')+'/' +userName+'/'+functionName
 
     new_function = Functions(
         entrypoint=functionName,
+        resource_id=resource_id,
         description=request.form['description'],
         content=function_code,
         weburl=weburl,

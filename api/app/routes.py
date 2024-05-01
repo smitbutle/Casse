@@ -1,4 +1,5 @@
 
+import re
 from app import app
 from app.controllers_aws import *
 from app.controller_scheduler import *
@@ -60,3 +61,21 @@ def create_scheduler(data):
 @ApiKeyVerify
 def saved_functions(data):
     return get_saved_functions(data)
+
+
+@app.route(base_path + '/toggle', methods=['POST'])
+@ApiKeyVerify
+def toggle_job(data):
+    return toggle_job_function(data)
+
+
+@app.route(base_path + '/deletejob', methods=['POST'])
+@ApiKeyVerify
+def delete_job(data):
+    return delete_job_function(data)
+
+@app.route(base_path + '/deletefunc', methods=['POST'])
+@ApiKeyVerify
+def delete_func(data):
+    request_data = request.json
+    return delete_function(data.username, request_data.get('functionName'), request_data.get('resource_id'))
