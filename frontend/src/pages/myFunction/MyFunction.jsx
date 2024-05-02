@@ -16,7 +16,7 @@ function MyFunction() {
   const [entryPoint, setEntryPoint] = useState('');
   const [description, setDescription] = useState('');
   const codeEditorRef = useRef(null);
-
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async () => {
     try {
       const formData = new FormData();
@@ -24,16 +24,17 @@ function MyFunction() {
       formData.append('function_code', codeEditorRef.current.getValue());
       formData.append('entry_point', entryPoint);
       formData.append('description', description);
-
+      setLoading(true);
       const response2 = await axios.post(apiUrl + 'upload', formData, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem("token")}`,
         }
       });
-
+      setLoading(false);
       response2.data && alert('Success! Function URL: ' + response2.data.body.url);
 
     } catch (error) {
+      setLoading(false);
       console.error('Error submitting Lambda function:', error);
       alert('Error submitting Lambda function');
     }
@@ -51,7 +52,7 @@ function MyFunction() {
           onChange={(e) => setDescription(e.target.value)}
         />
         <Button colorScheme="gray" onClick={handleSubmit}>
-          Submit
+          {loading? 'Loading...' : 'Submit'}
         </Button>
       </Flex>
     </Box>

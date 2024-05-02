@@ -13,7 +13,7 @@ import axios from 'axios';
 var host = "localhost"
 var port = "8000"
 
-const FunctionCard = ({ functionData }) => {
+const FunctionCard = ({ functionData , re, setRe}) => {
   const { content, create_date, description, entrypoint, function_id, user_id, weburl, resource_id } = functionData;
   console.log(functionData)
   const [isExpanded, setIsExpanded] = useState(false);
@@ -41,12 +41,10 @@ const FunctionCard = ({ functionData }) => {
       data: req
     }).then((response) => {
       console.log(response)
-      // handleClickCloseDialog()
-      // props.setRe(!props.re)
+      setRe(!re)
     }).then((error) => {
       console.log(error)
-      // handleClickCloseDialog()
-      // props.setRe(!props.re)
+      setRe(!re)
     });
   }
   return (

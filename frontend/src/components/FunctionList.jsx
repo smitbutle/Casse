@@ -13,6 +13,11 @@ const FunctionList = () => {
   
   const [functions, setFunctions] = useState([]);
 
+  const [re, setRe] = useState(false);
+
+
+  
+
   useEffect(() => {
 
     axios({
@@ -26,13 +31,13 @@ const FunctionList = () => {
       setFunctions(response.data.functions);
       console.log(response.data.functions)
     });
-  }, []);
+  }, [re]);
 
 
   return (localStorage.getItem("token") == null || localStorage.getItem("token") == '') ? <Navigate to="/" /> :
     <VStack spacing="4" align="stretch" m={10}>
       {functions.map(func => (
-        <FunctionCard key={func.function_id} functionData={func} />
+        <FunctionCard key={func.function_id} functionData={func} re={re} setRe={setRe}/>
       ))}
     </VStack>
 };
