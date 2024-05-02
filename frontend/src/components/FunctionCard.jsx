@@ -7,6 +7,7 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   useDisclosure,
+  HStack,
 } from "@chakra-ui/react";
 import axios from 'axios';
 
@@ -54,14 +55,14 @@ const FunctionCard = ({ functionData , re, setRe}) => {
           <Text fontWeight="bold">{entrypoint}</Text>
           <Text fontsize="sm" color="gray.500">{description}</Text>
         </Box>
-        <Box>
+        <HStack>
           <Button size="sm" variant="outline" m={2} onClick={() => setIsExpanded(!isExpanded)} cursor="pointer">
             {isExpanded ? "Collapse" : "Expand"}
           </Button>
           <Button size="sm" variant="outline" m={2} color={"white"} background={"red"} _hover={{ background: "#8c0e0e" }} onClick={onOpen}>
             Delete
           </Button>
-        </Box>
+        </HStack>
 
         <AlertDialog
           isOpen={isOpen}

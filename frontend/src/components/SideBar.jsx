@@ -69,7 +69,7 @@ function SideBar() {
               Saved Functions
             </Link>
           </ListItem>
-          <ListItem>
+          {/* <ListItem>
             <Link
               as={RouterLink}
               to="/notification"
@@ -82,7 +82,7 @@ function SideBar() {
             >
               Notification
             </Link>
-          </ListItem>
+          </ListItem> */}
         </List>
       </div>
     </Box>
