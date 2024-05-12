@@ -1,5 +1,3 @@
-
-import re
 from app import app
 from app.controllers_aws import *
 from app.controller_scheduler import *

@@ -1,7 +1,3 @@
-
-from app import db
-from app import utils
-from app import constants
 from app.models import User, Functions
 from app.utils import filter_jobs
 from flask import request,jsonify
@@ -11,11 +7,8 @@ import json
 from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
 import requests
-import boto3
 import os
-import zipfile
 
-import dotenv
 import uuid
 
 username = "clockwerk"  

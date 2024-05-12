@@ -1,4 +1,3 @@
-import resource
 from app import db
 from datetime import datetime, timezone
 
