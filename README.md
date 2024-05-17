@@ -57,59 +57,47 @@ Configure your AWS credentials and other environment variables in the .env file.
 3. **Docker Setup:**:
 Build and run the Docker containers:
 
-```sh
-docker-compose up --build
-```
+    ```sh
+    docker-compose up --build
+    ```
 
 4. **API Documentation**:
 Import the provided Postman collection to explore and test the APIs.
 
-5. **Usage**:
+## Testing
 
-User Authentication:
-Sign up and obtain JWT tokens for API access.
+- **Total Jobs:** 517
+- **Total Users:** 100
+- **Total Serverless Functions:** 178
 
-Function Deployment:
-Upload functions or write code directly in the provided editor.
-Deploy to AWS Lambda and obtain the function URL.
+#### Resource Usage:
 
-Job Scheduling:
-Create and manage cron jobs through the user interface.
-Define job details and scheduling rules.
+- **CPU:** ~0.25% of a single core
+- **Memory:** ~370 MB
 
-Monitoring:
-Monitor job status, execution logs, and system health through the admin UI.
-Project Diagrams
+## Results and Conclusion
 
-5. **Testing**:
-```
-Total Jobs: 517
-Total Users: 100
-Total Serverless Functions: 178
-Resource Usage:
-CPU: ~0.25% of a single core
-Memory: ~370 MB
-```
-
-6. **Results and Conclusion**:
 This project successfully addresses the challenges of dynamic task scheduling and serverless function deployment. By integrating cron scheduling with serverless computing, we provide a flexible and scalable solution for task automation in web environments. The intuitive interfaces and seamless workflows enhance developer productivity, enabling efficient task orchestration without the overhead of infrastructure management.
 
-**Contributing**
+## Contributing
+
 We welcome contributions to enhance the CASSE project! Please follow the standard GitHub Flow and submit pull requests for review.
 
-**License**
-This project is licensed under the MIT License. See the LICENSE file for more details.
+## License
 
-**Credits**
-Clockwerk: https://github.com/nightsilvertech/clockwerk 
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-**Developed by**:
+## Credits
 
-Swapnil Satish Mali
-Siddhesh Sunil Kitkaru
-Smit Sandeep Butle
+- **Clockwerk:** [GitHub Repository](https://github.com/nightsilvertech/clockwerk)
 
-**Under the guidance of**:
+## Developed by
 
-Prof. N.L. Mudegol
-Dr. M. A. Shah
+- Smit Sandeep Butle
+- Swapnil Satish Mali
+- Siddhesh Sunil Kitkaru
+
+## Under the guidance of
+
+- Prof. N.L. Mudegol
+- Dr. M. A. Shah
