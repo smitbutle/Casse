@@ -6,19 +6,10 @@ from app.utils import ApiKeyVerify
 
 base_path = os.environ.get('BASE_PATH')
 
-
 @app.route('/getfunctions', methods=['GET'])
 @ApiKeyVerify
 def get_functions(data):
     return get_functions_handler(data)
-
-
-@app.route('/', methods=['GET'])
-@ApiKeyVerify
-def init(data):
-    return jsonify(data)
-
-
 
 
 @app.route(base_path + '/signup', methods=['POST'])
@@ -77,3 +68,9 @@ def delete_job(data):
 def delete_func(data):
     request_data = request.json
     return delete_function(data.username, request_data.get('functionName'), request_data.get('resource_id'))
+
+
+
+@app.route(base_path+ '/', methods=['GET'])
+def init():
+    return "Server is running"
