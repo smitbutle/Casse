@@ -27,8 +27,8 @@ import { AddIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 import CronParser from '../CronParser';
 
-var host = "localhost"
-var port = "8000"
+const host = import.meta.env.VITE_HOST;
+const port = import.meta.env.VITE_PORT;
 
 
 export default function MainHeader(props) {

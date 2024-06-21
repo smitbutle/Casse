@@ -7,8 +7,8 @@ import axios from "axios";
 import SchedulerListItem from './SchedulerListItem';
 import MainHeader from './MainHeader';
 
-var host = "localhost"
-var port = "8000"
+const host = import.meta.env.VITE_HOST;
+const port = import.meta.env.VITE_PORT;
 
 function CreateJob() {
   const [schedulers, setSchedulers] = useState([]);

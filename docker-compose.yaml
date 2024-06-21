@@ -1,5 +1,3 @@
-version: '3.8'
-
 volumes:
   db-data:
 
@@ -14,11 +12,10 @@ services:
     container_name: casse-db
     expose:
       - 5432
-    ports:
-      - "5431:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
+      POSTGRES_USER: "dba"
       POSTGRES_PASSWORD: "smit2003"
     networks:
       - casse-network
@@ -37,8 +34,6 @@ services:
     container_name: casse-daemon
     expose:
       - 1929
-    ports:
-      - "1929:1929"
     environment:
       - SCHEDULER_USERNAME=clockwerk
       - SCHEDULER_PASSWORD=password
@@ -73,7 +68,7 @@ services:
       context: ./api
     container_name: casse-server
     ports:
-      - "8000:8000"
+      - "8001:8000"
     env_file:
       - ./api/.env
     depends_on:

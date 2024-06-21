@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 import axios from 'axios';
 
-var host = "localhost"
-var port = "8000"
+const host = import.meta.env.VITE_HOST;
+const port = import.meta.env.VITE_PORT;
 
 const FunctionCard = ({ functionData , re, setRe}) => {
   const { content, create_date, description, entrypoint, function_id, user_id, weburl, resource_id } = functionData;
