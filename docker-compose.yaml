@@ -68,7 +68,7 @@ services:
       context: ./api
     container_name: casse-server
     ports:
-      - "8000:8000"
+      - "8000:8010"
     env_file:
       - ./api/.env
     depends_on:
