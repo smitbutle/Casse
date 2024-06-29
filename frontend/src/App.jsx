@@ -13,7 +13,6 @@ import { useColorMode } from '@chakra-ui/react';
 import axios from 'axios';
 
 const host = import.meta.env.VITE_HOST;
-const port = import.meta.env.VITE_PORT;
 
 
 function App() {
@@ -28,7 +27,7 @@ function App() {
 
   useEffect(() => {
     axios({
-      baseURL: `http://${host}:${port}/api/jobs`,
+      baseURL: `http://${host}/api/jobs`,
       headers: {
         'Content-Type': "application/json",
         'Authorization': `Bearer ${localStorage.getItem("token")}`

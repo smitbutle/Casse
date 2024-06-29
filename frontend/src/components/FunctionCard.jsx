@@ -12,7 +12,6 @@ import {
 import axios from 'axios';
 
 const host = import.meta.env.VITE_HOST;
-const port = import.meta.env.VITE_PORT;
 
 const FunctionCard = ({ functionData , re, setRe}) => {
   const { content, create_date, description, entrypoint, function_id, user_id, weburl, resource_id } = functionData;
@@ -33,7 +32,7 @@ const FunctionCard = ({ functionData , re, setRe}) => {
       'resource_id': resource_id,
     }
     axios({
-      baseURL: `http://${host}:${port}/api/deletefunc`,
+      baseURL: `http://${host}/api/deletefunc`,
       headers: {
         'Content-Type': "application/json",
         'Authorization': `Bearer ${localStorage.getItem("token")}`

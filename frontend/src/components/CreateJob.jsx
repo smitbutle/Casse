@@ -8,7 +8,6 @@ import SchedulerListItem from './SchedulerListItem';
 import MainHeader from './MainHeader';
 
 const host = import.meta.env.VITE_HOST;
-const port = import.meta.env.VITE_PORT;
 
 function CreateJob() {
   const [schedulers, setSchedulers] = useState([]);
@@ -16,7 +15,7 @@ function CreateJob() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`http://${host}:${port}/api/alljobs`);
+        const response = await axios.get(`http://${host}/api/alljobs`);
         setSchedulers(response.data.schedulers);
       } catch (error) {
         console.error('Error fetching schedulers:', error);

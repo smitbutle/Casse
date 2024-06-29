@@ -3,7 +3,6 @@ import { Box, Button, FormControl, FormLabel, HStack, Image, Input, Stack } from
 import { Link } from 'react-router-dom';
 
 const host = import.meta.env.VITE_HOST;
-const port = import.meta.env.VITE_PORT;
 
 
 const Signup = () => {
@@ -17,7 +16,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://${host}:${port}/api/signup`, {
+      const response = await fetch(`http://${host}/api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

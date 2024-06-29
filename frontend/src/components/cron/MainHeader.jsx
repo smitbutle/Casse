@@ -28,7 +28,6 @@ import axios from 'axios';
 import CronParser from '../CronParser';
 
 const host = import.meta.env.VITE_HOST;
-const port = import.meta.env.VITE_PORT;
 
 
 export default function MainHeader(props) {
@@ -67,7 +66,7 @@ export default function MainHeader(props) {
                 'spec': cronSpec,
             }
             axios({
-                baseURL: `http://${host}:${port}/api/scheduler`,
+                baseURL: `http://${host}/api/scheduler`,
                 headers: {
                     'Content-Type': "application/json",
                     'Authorization': `Bearer ${localStorage.getItem("token")}`

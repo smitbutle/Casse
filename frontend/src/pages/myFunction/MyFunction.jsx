@@ -6,11 +6,10 @@ import { Navigate } from 'react-router-dom';
 
 
 const host = import.meta.env.VITE_HOST;
-const port = import.meta.env.VITE_PORT;
 
 
 
-const apiUrl = `http://${host}:${port}/api/`;
+const apiUrl = `http://${host}/api/`;
 
 function MyFunction() {
   const [entryPoint, setEntryPoint] = useState('');
