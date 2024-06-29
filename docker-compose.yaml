@@ -6,19 +6,19 @@ networks:
     driver: bridge
 
 services:
-  casse-db:
-    build:
-      context: ./db
-    container_name: casse-db
-    expose:
-      - 5432
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: "dba"
-      POSTGRES_PASSWORD: "smit2003"
-    networks:
-      - casse-network
+  # casse-db:
+  #   build:
+  #     context: ./db
+  #   container_name: casse-db
+  #   expose:
+  #     - 5432
+  #   volumes:
+  #     - db-data:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_USER: "dba"
+  #     POSTGRES_PASSWORD: "smit2003"
+  #   networks:
+  #     - casse-network
 
   redis-casse:
     image: redis
@@ -41,26 +41,26 @@ services:
       - REDIS_PORT=6379
       - REDIS_PASS=redis123
     depends_on:
-      - casse-db
+      # - casse-db
       - redis-casse
     networks:
       - casse-network
 
-  casse-ui:
-    build:
-      context: ./admin-ui
-    container_name: casse-ui
-    ports:
-      - "1930:1930"
-    environment:
-      - REACT_APP_SCHEDULER_HOST=localhost
-      - REACT_APP_SCHEDULER_PORT=1929
-      - REACT_APP_SCHEDULER_USERNAME=clockwerk
-      - REACT_APP_SCHEDULER_PASSWORD=password
-    depends_on:
-      - casse-daemon
-    networks:
-      - casse-network
+  # casse-ui:
+  #   build:
+  #     context: ./admin-ui
+  #   container_name: casse-ui
+  #   ports:
+  #     - "1930:1930"
+  #   environment:
+  #     - REACT_APP_SCHEDULER_HOST=localhost
+  #     - REACT_APP_SCHEDULER_PORT=1929
+  #     - REACT_APP_SCHEDULER_USERNAME=clockwerk
+  #     - REACT_APP_SCHEDULER_PASSWORD=password
+  #   depends_on:
+  #     - casse-daemon
+  #   networks:
+  #     - casse-network
 
   
   server:
