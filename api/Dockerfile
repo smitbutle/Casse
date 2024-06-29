@@ -17,6 +17,6 @@ COPY . /app
 EXPOSE 8010
 
 # Run run.py when the container launches
-RUN ["mkdir /app/temp"]
+RUN ["mkdir /app/app/temp"]
 
 CMD ["python", "run.py"]
