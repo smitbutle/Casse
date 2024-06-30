@@ -32,7 +32,7 @@ const FunctionCard = ({ functionData , re, setRe}) => {
       'resource_id': resource_id,
     }
     axios({
-      baseURL: `http://${host}/api/deletefunc`,
+      baseURL: `${host}/api/deletefunc`,
       headers: {
         'Content-Type': "application/json",
         'Authorization': `Bearer ${localStorage.getItem("token")}`

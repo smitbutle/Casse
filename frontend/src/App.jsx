@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     axios({
-      baseURL: `http://${host}/api/jobs`,
+      baseURL: `${host}/api/jobs`,
       headers: {
         'Content-Type': "application/json",
         'Authorization': `Bearer ${localStorage.getItem("token")}`

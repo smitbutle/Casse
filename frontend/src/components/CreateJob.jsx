@@ -15,7 +15,7 @@ function CreateJob() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`http://${host}/api/alljobs`);
+        const response = await axios.get(`${host}/api/alljobs`);
         setSchedulers(response.data.schedulers);
       } catch (error) {
         console.error('Error fetching schedulers:', error);

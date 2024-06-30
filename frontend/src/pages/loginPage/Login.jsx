@@ -17,7 +17,7 @@ const Login = (props) => {
       password,
     };
     try {
-      const response = await axios.post(`http://${host}/api/login`, data);
+      const response = await axios.post(`${host}/api/login`, data);
       if (response.status === 200) {
         props.onLoginSuccess();
         localStorage.setItem("token", response.data.result.token)

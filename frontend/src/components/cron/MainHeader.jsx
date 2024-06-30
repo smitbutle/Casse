@@ -66,7 +66,7 @@ export default function MainHeader(props) {
                 'spec': cronSpec,
             }
             axios({
-                baseURL: `http://${host}/api/scheduler`,
+                baseURL: `${host}/api/scheduler`,
                 headers: {
                     'Content-Type': "application/json",
                     'Authorization': `Bearer ${localStorage.getItem("token")}`

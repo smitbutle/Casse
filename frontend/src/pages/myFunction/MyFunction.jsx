@@ -9,7 +9,7 @@ const host = import.meta.env.VITE_HOST;
 
 
 
-const apiUrl = `http://${host}/api/`;
+const apiUrl = `${host}/api/`;
 
 function MyFunction() {
   const [entryPoint, setEntryPoint] = useState('');

@@ -1,0 +1,43 @@
+networks:
+  casse-network:
+    driver: bridge
+
+services:
+  redis-casse:
+    image: redis
+    container_name: redis-casse
+    expose:
+      - 6379
+    command: redis-server --save 60 1 --loglevel warning --requirepass redis123
+    networks:
+      - casse-network
+
+  casse-daemon:
+    image: smitbutle/casse-daemon
+    container_name: casse-daemon
+    expose:
+      - 1929
+    ports:
+      - "1929:1929"
+    environment:
+      - SCHEDULER_USERNAME=clockwerk
+      - SCHEDULER_PASSWORD=password
+      - REDIS_HOST=redis-casse
+      - REDIS_PORT=6379
+      - REDIS_PASS=redis123
+    depends_on:
+      - redis-casse
+    networks:
+      - casse-network
+
+  # server:
+  #   image: smitbutle/casse-server
+  #   container_name: casse-server
+  #   ports:
+  #     - "8000:8010"
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - casse-daemon
+  #   networks:
+  #     - casse-network

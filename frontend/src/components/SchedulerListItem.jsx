@@ -47,7 +47,7 @@ export default function SchedulerListItem(props) {
       'referenceId': props.scheduler.referenceId,
     }
     axios({
-      baseURL: `http://${host}/api/deletejob`,
+      baseURL: `${host}/api/deletejob`,
       headers: {
         'Content-Type': "application/json",
         'Authorization': `Bearer ${localStorage.getItem("token")}`
@@ -72,7 +72,7 @@ export default function SchedulerListItem(props) {
       'disabled': disabled,
     }
     axios({
-      baseURL: `http://${host}/api/toggle`,
+      baseURL: `${host}/api/toggle`,
       headers: {
         'Content-Type': "application/json",
         'Authorization': `Bearer ${localStorage.getItem("token")}`

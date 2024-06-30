@@ -20,7 +20,7 @@ const FunctionList = () => {
   useEffect(() => {
 
     axios({
-      baseURL: `http://${host}/api/myfunc`,
+      baseURL: `${host}/api/myfunc`,
       headers: {
         'Content-Type': "application/json",
         'Authorization': `Bearer ${localStorage.getItem("token")}`
