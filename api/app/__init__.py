@@ -15,4 +15,5 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # app.config.from_object('config')
 db = SQLAlchemy(app)
 
+from app import routes
 # Path: app/routes.py

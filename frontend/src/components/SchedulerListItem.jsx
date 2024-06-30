@@ -27,8 +27,7 @@ import {
 import { DeleteIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 
-var host = "localhost"
-var port = "8000"
+const host = import.meta.env.VITE_HOST;
 
 
 export default function SchedulerListItem(props) {
@@ -48,7 +47,7 @@ export default function SchedulerListItem(props) {
       'referenceId': props.scheduler.referenceId,
     }
     axios({
-      baseURL: `http://${host}:${port}/api/deletejob`,
+      baseURL: `http://${host}/api/deletejob`,
       headers: {
         'Content-Type': "application/json",
         'Authorization': `Bearer ${localStorage.getItem("token")}`
@@ -73,7 +72,7 @@ export default function SchedulerListItem(props) {
       'disabled': disabled,
     }
     axios({
-      baseURL: `http://${host}:${port}/api/toggle`,
+      baseURL: `http://${host}/api/toggle`,
       headers: {
         'Content-Type': "application/json",
         'Authorization': `Bearer ${localStorage.getItem("token")}`

@@ -75,13 +75,13 @@ def upload_function_handler(data):
     userName = data.username
 
     temp_file_name = str(uuid.uuid4()) + ".py"
-    file_path = "./temp/" + temp_file_name
+    file_path = os.getcwd() + "/app/temp/" + temp_file_name
 
-    with open(file_path, 'w') as temp_file:
+    with open(file_path, 'a') as temp_file:
         temp_file.write(function_code)
 
-    zip_file_path = "./temp/lambda_function.zip"
-    with zipfile.ZipFile(zip_file_path, 'w') as zipf:
+    zip_file_path = os.getcwd() + "/app/temp/lambda_function.zip"
+    with zipfile.ZipFile(zip_file_path, 'a') as zipf:
         zipf.write(file_path, os.path.basename(file_path))
 
     handlerName = os.path.splitext(temp_file_name)[0] + "." + functionName

@@ -27,8 +27,7 @@ import { AddIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 import CronParser from '../CronParser';
 
-var host = "localhost"
-var port = "8000"
+const host = import.meta.env.VITE_HOST;
 
 
 export default function MainHeader(props) {
@@ -67,7 +66,7 @@ export default function MainHeader(props) {
                 'spec': cronSpec,
             }
             axios({
-                baseURL: `http://${host}:${port}/api/scheduler`,
+                baseURL: `http://${host}/api/scheduler`,
                 headers: {
                     'Content-Type': "application/json",
                     'Authorization': `Bearer ${localStorage.getItem("token")}`

@@ -5,12 +5,11 @@ import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
 
-var host = "localhost"
-var port = "8000"
+const host = import.meta.env.VITE_HOST;
 
 
 
-const apiUrl = `http://${host}:${port}/api/`;
+const apiUrl = `http://${host}/api/`;
 
 function MyFunction() {
   const [entryPoint, setEntryPoint] = useState('');

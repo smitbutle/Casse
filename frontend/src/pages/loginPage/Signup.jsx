@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Box, Button, FormControl, FormLabel, HStack, Image, Input, Stack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-var host = "localhost"
-var port = "8000"
+const host = import.meta.env.VITE_HOST;
 
 
 const Signup = () => {
@@ -17,7 +16,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://${host}:${port}/api/signup`, {
+      const response = await fetch(`http://${host}/api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3,8 +3,7 @@ import { Box, Button, FormControl, FormLabel, Input, Stack, Link, HStack, Image 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-var host = "localhost"
-var port = "8000"
+const host = import.meta.env.VITE_HOST;
 
 const Login = (props) => {
   const [email, setEmail] = useState('');
@@ -18,7 +17,7 @@ const Login = (props) => {
       password,
     };
     try {
-      const response = await axios.post(`http://${host}:${port}/api/login`, data);
+      const response = await axios.post(`http://${host}/api/login`, data);
       if (response.status === 200) {
         props.onLoginSuccess();
         localStorage.setItem("token", response.data.result.token)

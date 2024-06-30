@@ -5,8 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
-var host = "localhost"
-var port = "8000"
+const host = import.meta.env.VITE_HOST;
 
 
 const FunctionList = () => {
@@ -21,7 +20,7 @@ const FunctionList = () => {
   useEffect(() => {
 
     axios({
-      baseURL: `http://${host}:${port}/api/myfunc`,
+      baseURL: `http://${host}/api/myfunc`,
       headers: {
         'Content-Type': "application/json",
         'Authorization': `Bearer ${localStorage.getItem("token")}`
